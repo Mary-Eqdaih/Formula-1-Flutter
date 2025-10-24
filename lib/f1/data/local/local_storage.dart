@@ -12,4 +12,9 @@ class LocalStorageData {
     final prefs = await SharedPreferences.getInstance();
     return prefs.getString(userEmailKey);
   }
+  Future<void> clearEmail() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.remove(userEmailKey);
+  }
+
 }

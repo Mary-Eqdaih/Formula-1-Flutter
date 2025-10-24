@@ -10,6 +10,7 @@ class Teams extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     var teamsProvider = Provider.of<F1Provider>(context);
 
     const darkBg = Color(0xFF0F0F10);
