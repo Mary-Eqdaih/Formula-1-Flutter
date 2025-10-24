@@ -166,7 +166,7 @@ class SignUp extends StatelessWidget {
                             ),
                           ),
                           onPressed: () {
-                            login(context);
+                            signUp(context);
                           },
                           child: const Text(
                             "Sign Up",
@@ -190,7 +190,7 @@ class SignUp extends StatelessWidget {
     );
   }
 
-  login(BuildContext context)  {
+  signUp(BuildContext context)  {
     if (_formKey.currentState!.validate()) {
        LocalStorageData().saveEmail(usernameController.text);
       Navigator.pushReplacementNamed(context, Routes.home);

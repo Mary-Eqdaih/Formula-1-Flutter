@@ -95,7 +95,7 @@ class _HomeState extends State<Home> {
         RaceCardWidget(
           title: latestRace!.title,
           color: f1Red,
-          subtitle: '${latestRace!.location} • ${latestRace!.date}',
+          subtitle: '${latestRace!.location} • ${latestRace!.circuit} • ${latestRace!.date}',
           result: 'Winner: ${latestRace!.winner} (${latestRace!.team})',
         ),
 
@@ -113,9 +113,10 @@ class _HomeState extends State<Home> {
         RaceCardWidget(
           title: nextRace!.title,
           color: gray,
-          subtitle: '${nextRace!.location} • ${nextRace!.date}',
+          subtitle: '${nextRace!.location} • ${nextRace!.circuit} • ${nextRace!.date} ',
           result: "Upcoming",
         ),
+        const SizedBox(height: 30),
       ],
     );
   }

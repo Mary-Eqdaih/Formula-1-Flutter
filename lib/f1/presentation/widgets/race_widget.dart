@@ -31,7 +31,9 @@ final String result;
           const SizedBox(height: 20),
           Text(
             subtitle,
+
             style: const TextStyle(
+              height: 1.8,
               fontWeight: FontWeight.bold,
               fontFamily: 'TitilliumWeb',
               color: Colors.white70,

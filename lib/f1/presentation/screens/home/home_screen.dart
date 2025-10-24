@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:formula1_fantasy/f1/presentation/providers/f1_provider.dart';
 import 'package:formula1_fantasy/f1/presentation/screens/home/home.dart';
 import 'package:formula1_fantasy/f1/presentation/screens/leader_board/leader_board.dart';
+import 'package:formula1_fantasy/routes/routes.dart';
+import 'package:provider/provider.dart';
 
 import '../teams/teams.dart';
 
@@ -18,6 +21,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    var teamsProvider =Provider.of<F1Provider>(context);
     final List<Widget> screens = [Home(), Teams(), LeaderBoard()];
     const f1Red = Color(0xFFE10600);
     const darkBg = Color(0xFF0F0F10);
@@ -59,8 +63,12 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         actions: [
           IconButton(
-            icon: const Icon(Icons.favorite_border, color: Colors.white),
-            onPressed: () {},
+            icon:  Badge.count(
+                count: teamsProvider.favs.length,
+                child: Icon(Icons.favorite_border, color: Colors.white)),
+            onPressed: () {
+              Navigator.pushNamed(context, Routes.favs);
+            },
           ),
         ],
       ),
