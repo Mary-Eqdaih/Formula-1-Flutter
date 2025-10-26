@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:formula1_fantasy/f1/data/local/local_storage.dart';
+import 'package:formula1_fantasy/f1/data/local/notes_DB.dart';
 import 'package:formula1_fantasy/f1/presentation/providers/f1_provider.dart';
+import 'package:formula1_fantasy/f1/presentation/providers/notes_provider.dart';
 import 'package:formula1_fantasy/f1/presentation/screens/aboutF1/about.dart';
 import 'package:formula1_fantasy/f1/presentation/screens/auth/sign_in.dart';
 import 'package:formula1_fantasy/f1/presentation/screens/auth/sign_up.dart';
@@ -11,7 +13,9 @@ import 'package:provider/provider.dart';
 import 'f1/presentation/screens/home/home_screen.dart';
 import 'f1/presentation/screens/notes/notes.dart';
 
-void main() {
+void main()async {
+  WidgetsFlutterBinding.ensureInitialized();
+
   runApp(MyApp());
 }
 
@@ -48,10 +52,12 @@ class _MyAppState extends State<MyApp> {
         home: Scaffold(body: Center(child: CircularProgressIndicator())),
       );
     }
-    return ChangeNotifierProvider(
-      create: (BuildContext context) {
-        return F1Provider()..init();
-      },
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => F1Provider()..init()),
+
+      ],
+
       child: MaterialApp(
         routes: {
           Routes.signIn: (context) => SignIn(),

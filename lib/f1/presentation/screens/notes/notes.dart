@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:formula1_fantasy/f1/data/models/notes_model.dart';
+import 'package:formula1_fantasy/f1/presentation/providers/notes_provider.dart';
+import 'package:formula1_fantasy/f1/presentation/widgets/Custom_text_field.dart';
+import 'package:formula1_fantasy/f1/presentation/widgets/notes_widget.dart';
+import 'package:provider/provider.dart';
 
 class Notes extends StatefulWidget {
   const Notes({super.key});
@@ -8,15 +13,15 @@ class Notes extends StatefulWidget {
 }
 
 class _NotesState extends State<Notes> {
-  // Temporary mock data (you’ll replace this later with SQLite)
-  final List<Map<String, String>> notes = [
-    {'title': 'Monaco GP', 'body': 'Amazing race with tight corners 🏎️'},
-    {'title': 'Silverstone', 'body': 'Rain changed everything ☔'},
-    {'title': 'Spa', 'body': 'Verstappen dominated again 🚀'},
-  ];
+  TextEditingController titleController = TextEditingController();
+  TextEditingController contentController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
+    List<NotesModel> notes=[
+      NotesModel(title: "title", content: "content", date: "${DateTime.now().day}/${DateTime.now().month}",)
+    ];
+
     const darkBg = Color(0xFF0F0F10);
     const f1Red = Color(0xFFE10600);
 
@@ -24,15 +29,10 @@ class _NotesState extends State<Notes> {
       backgroundColor: darkBg,
       appBar: AppBar(
         backgroundColor: darkBg,
-        title: const Text(
-          'Race Notes',
-          style: TextStyle(color: Colors.white),
-        ),
+        title: const Text('Race Notes', style: TextStyle(color: Colors.white)),
         centerTitle: true,
         iconTheme: const IconThemeData(color: Colors.white),
       ),
-
-      // 📝 Main body
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: notes.isEmpty
@@ -46,47 +46,67 @@ class _NotesState extends State<Notes> {
             : ListView.builder(
           itemCount: notes.length,
           itemBuilder: (context, index) {
-            final note = notes[index];
-            return Container(
-              margin: const EdgeInsets.only(bottom: 12),
-              decoration: BoxDecoration(
-                color: Colors.white10,
-                borderRadius: BorderRadius.circular(10),
-                border: Border.all(color: f1Red.withOpacity(0.3)),
-              ),
-              child: ListTile(
-                title: Text(
-                  note['title']!,
-                  style: const TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16),
-                ),
-                subtitle: Text(
-                  note['body']!,
-                  style: const TextStyle(
-                    color: Colors.white70,
-                    fontSize: 14,
-                  ),
-                ),
-                trailing: const Icon(Icons.arrow_forward_ios,
-                    size: 16, color: Colors.white54),
-                onTap: () {
-                  // Later: open note for editing
-                },
-              ),
-            );
+            return NotesWidget(model: notes[index]);
           },
         ),
       ),
-
-
       floatingActionButton: FloatingActionButton(
-        backgroundColor: f1Red,
         onPressed: () {
-          Navigator.pushNamed(context, '/addNote'); // Go to AddNotePage
+          showModalBottomSheet(
+            context: context,
+            builder: (context) {
+              return Container(
+                decoration: const BoxDecoration(color: darkBg),
+                child: Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      CustomTextField(
+                        hint: "Title",
+                        controller: titleController,
+                      ),
+                      const SizedBox(height: 20),
+                      CustomTextField(
+                        hint: "Content",
+                        controller: contentController,
+                      ),
+                      const SizedBox(height: 20),
+                      SizedBox(
+                        width: double.infinity,
+                        height: 65,
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: f1Red,
+                            elevation: 0,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(30),
+                              side: BorderSide.none,
+                            ),
+                          ),
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          child: const Text(
+                            "Add",
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                              fontFamily: "TitilliumWeb",
+                              fontSize: 18,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              );
+            },
+          );
         },
-        child: const Icon(Icons.add,color: Colors.white,fontWeight: FontWeight.bold,),
+        backgroundColor: f1Red,
+        child: const Icon(Icons.add, color: Colors.white),
       ),
     );
   }

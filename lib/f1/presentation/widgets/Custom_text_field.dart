@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 class CustomTextField extends StatelessWidget {
-  const CustomTextField({super.key, required this.hint, required this.isPassword, required this.controller,this.validator});
+  const CustomTextField({super.key, required this.hint,  this.isPassword=false, required this.controller,this.validator});
 
 
   final String hint;
