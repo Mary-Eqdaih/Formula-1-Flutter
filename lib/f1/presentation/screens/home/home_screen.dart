@@ -43,6 +43,14 @@ class _HomeScreenState extends State<HomeScreen> {
         ],
       ),
       backgroundColor: darkBg,
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: f1Red,
+        onPressed: () {
+          Navigator.pushNamed(context, Routes.notes);
+        },
+        child: const Icon(Icons.note_add,color: Colors.white,fontWeight: FontWeight.bold,),
+      ),
+
       appBar: AppBar(
         backgroundColor: darkBg,
         elevation: 0,

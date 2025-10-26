@@ -8,14 +8,14 @@ import 'package:formula1_fantasy/f1/presentation/screens/teams/teams_details.dar
 import 'package:formula1_fantasy/routes/routes.dart';
 import 'package:provider/provider.dart';
 import 'f1/presentation/screens/home/home_screen.dart';
-
+import 'f1/presentation/screens/notes/notes.dart';
 
 void main() {
   runApp(MyApp());
 }
 
 class MyApp extends StatefulWidget {
-   MyApp({super.key});
+  MyApp({super.key});
 
   @override
   State<MyApp> createState() => _MyAppState();
@@ -44,25 +44,25 @@ class _MyAppState extends State<MyApp> {
     if (isLoading) {
       return const MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: Scaffold(
-          body: Center(child: CircularProgressIndicator()),
-        ),
+        home: Scaffold(body: Center(child: CircularProgressIndicator())),
       );
     }
     return ChangeNotifierProvider(
-      create: (BuildContext context) { return F1Provider()..fetchTeams(); },
+      create: (BuildContext context) {
+        return F1Provider()..init();
+      },
       child: MaterialApp(
         routes: {
-        Routes.signIn: (context) => SignIn(),
-        Routes.signUp: (context) => SignUp(),
-        Routes.home: (context) => HomeScreen(),
-        Routes.teamDetails: (context) =>TeamDetails(),
-        Routes.favs: (context) =>Favorites(),
-
+          Routes.signIn: (context) => SignIn(),
+          Routes.signUp: (context) => SignUp(),
+          Routes.home: (context) => HomeScreen(),
+          Routes.teamDetails: (context) => TeamDetails(),
+          Routes.favs: (context) => Favorites(),
+          Routes.notes: (context) => Notes(),
         },
         debugShowCheckedModeBanner: false,
         // home: HomeScreen(),
-        home:savedEmail == null ? SignIn() : HomeScreen(),
+        home: savedEmail == null ? SignIn() : HomeScreen(),
       ),
     );
   }

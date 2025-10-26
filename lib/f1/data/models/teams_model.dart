@@ -2,11 +2,13 @@ class TeamsModel {
   final String teamName;
   final String nationality;
   final String logo;
+  final String constructorId;
 
   TeamsModel({
     required this.teamName,
     required this.nationality,
     required this.logo,
+    required this.constructorId,
   });
 
   factory TeamsModel.fromJson(Map<String, dynamic> json) {
@@ -27,6 +29,7 @@ class TeamsModel {
     };
 
     return TeamsModel(
+      constructorId: json["constructorId"],
       teamName: name,
       nationality: json['nationality'] ?? '',
       logo: logos[name] ?? 'assets/images/F1_logo.svg', // fallback if missing

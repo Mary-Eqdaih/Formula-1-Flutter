@@ -6,22 +6,26 @@ import 'package:formula1_fantasy/routes/routes.dart';
 import 'package:provider/provider.dart';
 
 class TeamsWidget extends StatelessWidget {
-  const TeamsWidget({super.key, required this.model});
+  const TeamsWidget({
+    super.key,
+    required this.model,
+    this.isUsedInFavorites = false,
+  });
   final TeamsModel model;
+  final bool isUsedInFavorites;
 
   @override
   Widget build(BuildContext context) {
-    var teamsProvider =Provider.of<F1Provider>(context);
+    var teamsProvider = Provider.of<F1Provider>(context);
     const cardColor = Color(0xFF18191A);
     const f1Red = Color(0xFFE10600);
     return InkWell(
       onTap: () {
-
-        Navigator.pushNamed(context, Routes.teamDetails,arguments: model);
+        Navigator.pushNamed(context, Routes.teamDetails, arguments: model);
       },
       borderRadius: BorderRadius.circular(14),
       child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 10,),
+        padding: const EdgeInsets.symmetric(vertical: 10),
         child: Container(
           decoration: BoxDecoration(
             color: cardColor,
@@ -69,18 +73,21 @@ class TeamsWidget extends StatelessWidget {
                   ],
                 ),
               ),
-               IconButton(onPressed: (){
-             if(teamsProvider.favs.contains(model)){
-               teamsProvider.removeFromFavorites(model);
-             }else{
-               teamsProvider.addToFavorites(model);
-               
-               
-             }
-
-
-               }, icon: teamsProvider.favs.contains(model)?Icon(Icons.favorite,color: f1Red,):Icon(Icons.favorite_border,color: Colors.white,),
-               ) ],
+              IconButton(
+                onPressed: () {
+                  if (teamsProvider.favs.contains(model)) {
+                    teamsProvider.removeFromFavorites(model);
+                  } else {
+                    teamsProvider.addToFavorites(model);
+                  }
+                },
+                icon: teamsProvider.favs.contains(model)
+                    ? isUsedInFavorites
+                        ? Icon(Icons.favorite, color: f1Red)
+                    : Icon(Icons.favorite, color: f1Red):
+                    Icon(Icons.favorite_border),
+              ),
+            ],
           ),
         ),
       ),
