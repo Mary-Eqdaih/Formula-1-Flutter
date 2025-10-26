@@ -27,6 +27,7 @@ flutter:
 
   assets:
     - assets/images/
+    - assets/F1DB/
 
   fonts:
     - family: TitilliumWeb

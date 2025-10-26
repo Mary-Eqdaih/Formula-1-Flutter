@@ -4,6 +4,7 @@ class LocalStorageData {
   static const userEmailKey = 'user_email';
   static const String favsKey = 'favoriteTeams';
 
+  // User Name
   Future<void> saveEmail(String email) async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setString(userEmailKey, email);
@@ -18,8 +19,9 @@ class LocalStorageData {
     final prefs = await SharedPreferences.getInstance();
     await prefs.remove(userEmailKey);
   }
+  //////////////////////////////////////////////////////////////////////////////
 
-
+  // Favorites
 
   // Save list of team IDs {list of strings}
   static Future<void> saveFavorites(List<String> ids) async {

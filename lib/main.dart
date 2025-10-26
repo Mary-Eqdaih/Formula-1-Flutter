@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:formula1_fantasy/f1/data/local/local_storage.dart';
 import 'package:formula1_fantasy/f1/presentation/providers/f1_provider.dart';
+import 'package:formula1_fantasy/f1/presentation/screens/aboutF1/about.dart';
 import 'package:formula1_fantasy/f1/presentation/screens/auth/sign_in.dart';
 import 'package:formula1_fantasy/f1/presentation/screens/auth/sign_up.dart';
 import 'package:formula1_fantasy/f1/presentation/screens/favorites/favorites.dart';
@@ -59,6 +60,7 @@ class _MyAppState extends State<MyApp> {
           Routes.teamDetails: (context) => TeamDetails(),
           Routes.favs: (context) => Favorites(),
           Routes.notes: (context) => Notes(),
+          Routes.aboutF1: (context) => aboutF1(),
         },
         debugShowCheckedModeBanner: false,
         // home: HomeScreen(),

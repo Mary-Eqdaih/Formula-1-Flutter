@@ -81,15 +81,21 @@ class _HomeScreenState extends State<HomeScreen> {
           PopupMenuButton<String>(
             icon: const Icon(Icons.more_vert, color: Colors.white),
             onSelected: (value) async {
-              await LocalStorageData().clearEmail();
-              Navigator.pushNamedAndRemoveUntil(
-                context,
-                Routes.signIn,
-                    (route) => false,
-              );
+              switch (value) {
+                case 'about':
+                  Navigator.pushNamed(context, Routes.aboutF1); // open About F1
+                  break;
+                case 'logout':
+                  await LocalStorageData().clearEmail();
+                  Navigator.pushNamedAndRemoveUntil(context, Routes.signIn, (_) => false);
+                  break;
+              }
+
             },
             itemBuilder: (context) => const [
-              PopupMenuItem(value: 'logout', child: Center(child: Text('Logout'))),
+              PopupMenuItem(value: 'about',  child: ListTile(leading: Icon(Icons.info_outline), title: Text('About F1'))),
+              PopupMenuItem(value: 'logout', child: ListTile(title: Text('Logout'),leading: Icon(Icons.logout),)),
+
             ],
           ),
         ],
