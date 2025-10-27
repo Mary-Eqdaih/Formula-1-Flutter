@@ -18,9 +18,15 @@ class _NotesState extends State<Notes> {
 
   @override
   Widget build(BuildContext context) {
-    List<NotesModel> notes=[
-      NotesModel(title: "title", content: "content", date: "${DateTime.now().day}/${DateTime.now().month}",)
-    ];
+    var notesProvider = Provider.of<NotesProvider>(context);
+
+    // List<NotesModel> notes = [
+    //   NotesModel(
+    //     title: "title",
+    //     content: "content",
+    //     date: "${DateTime.now().day}/${DateTime.now().month}",
+    //   ),
+    // ];
 
     const darkBg = Color(0xFF0F0F10);
     const f1Red = Color(0xFFE10600);
@@ -29,13 +35,18 @@ class _NotesState extends State<Notes> {
       backgroundColor: darkBg,
       appBar: AppBar(
         backgroundColor: darkBg,
-        title: const Text('Race Notes', style: TextStyle(color: Colors.white,fontFamily: "TitilliumWeb")),
+        title: const Text(
+          'Race Notes',
+          style: TextStyle(color: Colors.white, fontFamily: "TitilliumWeb"),
+        ),
         centerTitle: true,
         iconTheme: const IconThemeData(color: Colors.white),
       ),
-      body: Padding(
+      body: Consumer<NotesProvider>(
+        builder: (context, provider, child) {
+      return Padding(
         padding: const EdgeInsets.all(16.0),
-        child: notes.isEmpty
+        child: provider.notes.isEmpty
             ? const Center(
           child: Text(
             'No notes yet.\nTap + to add one!',
@@ -44,13 +55,21 @@ class _NotesState extends State<Notes> {
           ),
         )
             : ListView.builder(
-          itemCount: notes.length,
+          itemCount: provider.notes.length,
           itemBuilder: (context, index) {
-            return NotesWidget(model: notes[index]);
+            return NotesWidget(
+              model: provider.notes[index],
+              onDismissed: (_) {
+                provider.deleteNote(provider.notes[index]);
+              },
+            );
           },
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
+      );
+    },
+    ),
+
+    floatingActionButton: FloatingActionButton(
         onPressed: () {
           showModalBottomSheet(
             context: context,
@@ -85,6 +104,15 @@ class _NotesState extends State<Notes> {
                             ),
                           ),
                           onPressed: () {
+                            NotesModel note = NotesModel(
+                              title: titleController.text,
+                              content: contentController.text,
+                              date:
+                              "${DateTime.now().day}/${DateTime.now().month}",
+                            );
+                            notesProvider.addNote(note);
+                          titleController.clear();
+                            contentController.clear();
                             Navigator.pop(context);
                           },
                           child: const Text(

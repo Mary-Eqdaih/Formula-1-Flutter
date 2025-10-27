@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:formula1_fantasy/f1/data/local/notes_DB.dart';
 import 'package:formula1_fantasy/f1/data/models/notes_model.dart';
 import 'package:formula1_fantasy/f1/presentation/providers/notes_provider.dart';
 import 'package:formula1_fantasy/f1/presentation/widgets/Custom_text_field.dart';
@@ -9,12 +10,17 @@ class NotesWidget extends StatelessWidget {
     titleController.text = model.title;
     contentController.text = model.content;
   }
+
+   TextEditingController titleController = TextEditingController();
+   TextEditingController contentController = TextEditingController();
   final NotesModel model;
   final void Function(DismissDirection)? onDismissed;
 
 
   @override
   Widget build(BuildContext context) {
+
+
     const darkBg = Color(0xFF0F0F10);
     const f1Red = Color(0xFFE10600);
     return Dismissible(
@@ -62,7 +68,7 @@ class NotesWidget extends StatelessWidget {
               SizedBox(height: 12),
               Text(
                 model.content,
-                style: const TextStyle(color: Colors.white, fontSize: 16,fontFamily: "TitilliumWeb"),
+                style: const TextStyle(color: Colors.white, fontSize: 16,fontFamily: "TitilliumWeb",letterSpacing: 1,height: 1.8),
               ),
             ],
           ),
@@ -101,6 +107,19 @@ class NotesWidget extends StatelessWidget {
                               ),
                             ),
                             onPressed: ()  {
+
+                              NotesModel updatedNote = NotesModel(
+                                title: titleController.text,
+                                content: contentController.text,
+                                date:
+                                "${DateTime.now().day}/${DateTime.now().month}",
+                                id: model.id,
+                                //   same date and id of the old note before update
+                              );
+                              // await NotesSqliteDB.updateNoteFromDB(update);
+                              Provider.of<NotesProvider>(
+                                context,listen: false,
+                              ).updateNote(updatedNote);
                               Navigator.pop(context);
                             },
                             child: Text(
@@ -127,5 +146,3 @@ class NotesWidget extends StatelessWidget {
   }
 }
 
-TextEditingController titleController = TextEditingController();
-TextEditingController contentController = TextEditingController();

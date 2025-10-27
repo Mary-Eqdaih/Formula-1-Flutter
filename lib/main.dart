@@ -15,7 +15,7 @@ import 'f1/presentation/screens/notes/notes.dart';
 
 void main()async {
   WidgetsFlutterBinding.ensureInitialized();
-
+  await NotesDB.init();
   runApp(MyApp());
 }
 
@@ -55,6 +55,7 @@ class _MyAppState extends State<MyApp> {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => F1Provider()..init()),
+        ChangeNotifierProvider(create: (_) => NotesProvider()..fetchNotes()),
 
       ],
 

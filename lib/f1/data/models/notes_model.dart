@@ -1,8 +1,12 @@
-
+import 'dart:convert';
 
 class NotesModel {
-  NotesModel(
-      { required this.title, required this.content, required this.date, this.id = 0});
+  NotesModel({
+    required this.title,
+    required this.content,
+    required this.date,
+    this.id = 0,
+  });
 
   final String title;
   final String content;
@@ -10,4 +14,10 @@ class NotesModel {
   final int id;
 
 
+  NotesModel.fromJson(Map<String, dynamic> json)
+      : title = json["title"],
+        date = json["date"],
+        content = json["content"],
+        id = json["id"] ;
 }
+// named constructor that takes a map and return it as dart object (NotesModel)
