@@ -56,16 +56,17 @@ class NotesWidget extends StatelessWidget {
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
                   fontSize: 20,
+                  fontFamily: "TitilliumWeb"
                 ),
               ),
               SizedBox(height: 12),
               Text(
                 model.content,
-                style: const TextStyle(color: Colors.white, fontSize: 16),
+                style: const TextStyle(color: Colors.white, fontSize: 16,fontFamily: "TitilliumWeb"),
               ),
             ],
           ),
-          trailing: Text(model.date, style: TextStyle(color: Colors.white)),
+          trailing: Text(model.date, style: TextStyle(color: Colors.white,fontFamily: "TitilliumWeb")),
           onTap: () {
             showModalBottomSheet(
               context: context,

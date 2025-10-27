@@ -29,7 +29,7 @@ class _NotesState extends State<Notes> {
       backgroundColor: darkBg,
       appBar: AppBar(
         backgroundColor: darkBg,
-        title: const Text('Race Notes', style: TextStyle(color: Colors.white)),
+        title: const Text('Race Notes', style: TextStyle(color: Colors.white,fontFamily: "TitilliumWeb")),
         centerTitle: true,
         iconTheme: const IconThemeData(color: Colors.white),
       ),
