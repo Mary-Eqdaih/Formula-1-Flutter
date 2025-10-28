@@ -39,7 +39,6 @@ class DriverWidget extends StatelessWidget {
           ),
           const SizedBox(width: 25),
 
-          // Info + stats
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -148,7 +147,7 @@ class DriverWidget extends StatelessWidget {
       'https://en.wikipedia.org/w/index.php?search=${Uri.encodeComponent(d.name)}',
     );
 
-    await launchUrl(uri, mode: LaunchMode.externalApplication);
+    await launchUrl(uri, mode: LaunchMode.inAppBrowserView);
   }
 
   static String _initials(String name) {

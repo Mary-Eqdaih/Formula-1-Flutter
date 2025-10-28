@@ -3,14 +3,14 @@ class TeamsModel {
   final String nationality;
   final String logo;
   final String constructorId;
-  // final String wikiUrl;
+  final String wikiUrl;
 
   TeamsModel({
     required this.teamName,
     required this.nationality,
     required this.logo,
     required this.constructorId,
-    // required this.wikiUrl,
+    required this.wikiUrl,
   });
 
   factory TeamsModel.fromJson(Map<String, dynamic> json) {
@@ -31,7 +31,7 @@ class TeamsModel {
     };
 
     return TeamsModel(
-      // wikiUrl: json["wikiUrl"],
+      wikiUrl: json["url"],
       constructorId: json["constructorId"],
       teamName: name,
       nationality: json['nationality'] ?? '',
