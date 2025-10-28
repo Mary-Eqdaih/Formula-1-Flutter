@@ -6,7 +6,7 @@ class TeamsApi {
   static const _url =
       'https://api.jolpi.ca/ergast/f1/current/constructors.json';
 
-  Future<List<TeamsModel>> fetchData() async {
+  Future<List<TeamsModel>> fetchTeams() async {
     final response = await http.get(Uri.parse(_url));
 
     if (response.statusCode != 200) {

@@ -7,5 +7,6 @@ class Routes {
     static const String favs = "/favs";
     static const String notes = "/notes";
     static const String aboutF1 = "/aboutF1";
+    static const String addNote = "/addNote";
 
 }

@@ -21,6 +21,7 @@ class TeamsWidget extends StatelessWidget {
     const f1Red = Color(0xFFE10600);
     return InkWell(
       onTap: () {
+
         Navigator.pushNamed(context, Routes.teamDetails, arguments: model);
       },
       borderRadius: BorderRadius.circular(14),

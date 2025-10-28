@@ -1,18 +1,23 @@
 import 'package:flutter/material.dart';
-class CustomTextField extends StatelessWidget {
-  const CustomTextField({super.key, required this.hint,  this.isPassword=false, required this.controller,this.validator});
 
+class CustomTextField extends StatelessWidget {
+  const CustomTextField({
+    super.key,
+    required this.hint,
+    this.isPassword = false,
+    required this.controller,
+    this.validator,
+  });
 
   final String hint;
   final bool isPassword;
   final TextEditingController controller;
   final String? Function(String?)? validator;
 
-
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-
+      keyboardType: TextInputType.text,
       validator: validator,
       controller: controller,
       obscureText: isPassword,
@@ -22,7 +27,10 @@ class CustomTextField extends StatelessWidget {
         hintStyle: const TextStyle(color: Color(0xffACACAC)),
         filled: true,
         fillColor: Colors.white,
-        contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+        contentPadding: const EdgeInsets.symmetric(
+          horizontal: 20,
+          vertical: 20,
+        ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(30),
           borderSide: const BorderSide(color: Colors.white24),
@@ -32,7 +40,7 @@ class CustomTextField extends StatelessWidget {
           borderSide: const BorderSide(color: Colors.white70),
         ),
       ),
-      style: const TextStyle(color: Colors.black,),
+      style: const TextStyle(color: Colors.black),
     );
   }
 }

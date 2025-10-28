@@ -7,6 +7,7 @@ import 'package:formula1_fantasy/f1/presentation/screens/aboutF1/about.dart';
 import 'package:formula1_fantasy/f1/presentation/screens/auth/sign_in.dart';
 import 'package:formula1_fantasy/f1/presentation/screens/auth/sign_up.dart';
 import 'package:formula1_fantasy/f1/presentation/screens/favorites/favorites.dart';
+import 'package:formula1_fantasy/f1/presentation/screens/notes/add_note.dart';
 import 'package:formula1_fantasy/f1/presentation/screens/teams/teams_details.dart';
 import 'package:formula1_fantasy/routes/routes.dart';
 import 'package:provider/provider.dart';
@@ -60,6 +61,9 @@ class _MyAppState extends State<MyApp> {
       ],
 
       child: MaterialApp(
+        theme: ThemeData(
+          fontFamily: 'TitilliumWeb',
+        ),
         routes: {
           Routes.signIn: (context) => SignIn(),
           Routes.signUp: (context) => SignUp(),
@@ -68,6 +72,7 @@ class _MyAppState extends State<MyApp> {
           Routes.favs: (context) => Favorites(),
           Routes.notes: (context) => Notes(),
           Routes.aboutF1: (context) => aboutF1(),
+          Routes.addNote: (context) => AddNote(),
         },
         debugShowCheckedModeBanner: false,
         // home: HomeScreen(),

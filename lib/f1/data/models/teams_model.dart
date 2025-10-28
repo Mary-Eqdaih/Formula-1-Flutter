@@ -3,12 +3,14 @@ class TeamsModel {
   final String nationality;
   final String logo;
   final String constructorId;
+  // final String wikiUrl;
 
   TeamsModel({
     required this.teamName,
     required this.nationality,
     required this.logo,
     required this.constructorId,
+    // required this.wikiUrl,
   });
 
   factory TeamsModel.fromJson(Map<String, dynamic> json) {
@@ -29,6 +31,7 @@ class TeamsModel {
     };
 
     return TeamsModel(
+      // wikiUrl: json["wikiUrl"],
       constructorId: json["constructorId"],
       teamName: name,
       nationality: json['nationality'] ?? '',
@@ -37,3 +40,6 @@ class TeamsModel {
   }
 }
 //takes a map and returns TeamModel
+
+
+//So you can use the constructorId from your TeamsModel to call the API when the TeamDetails page opens.
