@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:formula1_fantasy/f1/data/local/notes_DB.dart';
 import 'package:formula1_fantasy/f1/data/models/notes_model.dart';
 import 'package:formula1_fantasy/f1/presentation/providers/notes_provider.dart';
 import 'package:formula1_fantasy/f1/presentation/widgets/Custom_text_field.dart';
+import 'package:formula1_fantasy/f1/presentation/widgets/f1_text_field.dart';
+import 'package:formula1_fantasy/routes/routes.dart';
 import 'package:provider/provider.dart';
+
 
 class NotesWidget extends StatelessWidget {
    NotesWidget({super.key, required this.model,this.onDismissed}){
@@ -74,66 +76,76 @@ class NotesWidget extends StatelessWidget {
           ),
           trailing: Text(model.date, style: TextStyle(color: Colors.white,fontFamily: "TitilliumWeb")),
           onTap: () {
+
             showModalBottomSheet(
+              isScrollControlled: true,
               context: context,
               builder: (context) {
-                return Container(
-                  decoration: BoxDecoration(color: darkBg),
-                  child: Padding(
-                    padding: const EdgeInsets.all(20.0),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        CustomTextField(
-                          hint: "Title",
-                          controller: titleController,
-                        ),
-                        SizedBox(height: 20),
-                        CustomTextField(
-                          hint: "Content",
-                          controller: contentController,
-                        ),
-                        SizedBox(height: 20),
-                        SizedBox(
-                          width: double.infinity,
-                          height: 65,
-                          child: ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: f1Red,
-                              elevation: 0,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(30),
-                                side: BorderSide.none,
+                return FractionallySizedBox(
+                  heightFactor: 0.80,
+                  child: Container(
+                    decoration: BoxDecoration(color: darkBg),
+                    child: Padding(
+                      padding: const EdgeInsets.all(20.0),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          F1TextField(
+                            textInputAction: TextInputAction.next,
+                            controller: titleController,
+                            hint: "Enter race title...",
+                            minLines: 1,
+                            maxLines: 3,
+                          ),
+                          SizedBox(height: 20),
+                          F1TextField(
+                            textInputAction: TextInputAction.done,
+                            controller: contentController,
+                            hint: "Write detailed race notes...",
+                            minLines: 5,
+                            maxLines: null,
+                          ),
+                          SizedBox(height: 20),
+                          SizedBox(
+                            width: double.infinity,
+                            height: 65,
+                            child: ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: f1Red,
+                                elevation: 0,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(30),
+                                  side: BorderSide.none,
+                                ),
                               ),
-                            ),
-                            onPressed: ()  {
-
-                              NotesModel updatedNote = NotesModel(
-                                title: titleController.text,
-                                content: contentController.text,
-                                date:
-                                "${DateTime.now().day}/${DateTime.now().month}",
-                                id: model.id,
-                                //   same date and id of the old note before update
-                              );
-                              // await NotesSqliteDB.updateNoteFromDB(update);
-                              Provider.of<NotesProvider>(
-                                context,listen: false,
-                              ).updateNote(updatedNote);
-                              Navigator.pop(context);
-                            },
-                            child: Text(
-                              "Save",
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Colors.white,
-                                fontFamily: "TitilliumWeb",
-                                fontSize: 18,
+                              onPressed: ()  {
+                  
+                                NotesModel updatedNote = NotesModel(
+                                  title: titleController.text,
+                                  content: contentController.text,
+                                  date:
+                                  "${DateTime.now().day}/${DateTime.now().month}",
+                                  id: model.id,
+                                );
+                  
+                                Provider.of<NotesProvider>(
+                                  context,listen: false,
+                                ).updateNote(updatedNote);
+                                Navigator.pop(context);
+                              },
+                              child: Text(
+                                "Save",
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white,
+                                  fontFamily: "TitilliumWeb",
+                                  fontSize: 18,
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                 );

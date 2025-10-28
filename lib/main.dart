@@ -73,6 +73,7 @@ class _MyAppState extends State<MyApp> {
           Routes.notes: (context) => Notes(),
           Routes.aboutF1: (context) => aboutF1(),
           Routes.addNote: (context) => AddNote(),
+
         },
         debugShowCheckedModeBanner: false,
         // home: HomeScreen(),
