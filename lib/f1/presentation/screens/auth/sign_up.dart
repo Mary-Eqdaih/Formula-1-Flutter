@@ -192,7 +192,8 @@ class SignUp extends StatelessWidget {
 
   signUp(BuildContext context)  {
     if (_formKey.currentState!.validate()) {
-       LocalStorageData().saveEmail(usernameController.text);
+       LocalStorageData().saveUsername(usernameController.text);
+       LocalStorageData().saveEmail(emailController.text);
       Navigator.pushReplacementNamed(context, Routes.home);
     }
   }

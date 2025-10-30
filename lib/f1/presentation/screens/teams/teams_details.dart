@@ -53,6 +53,7 @@ class _TeamDetailsState extends State<TeamDetails> {
         child: Column(
           children: [
 
+
             Container(
               decoration: BoxDecoration(
                 color: TeamDetails.cardColor,
@@ -121,8 +122,8 @@ class _TeamDetailsState extends State<TeamDetails> {
               ),
             ),
 
-            const SizedBox(height: 20),
 
+            const SizedBox(height: 20),
             Align(
               alignment: Alignment.centerLeft,
               child: Text(

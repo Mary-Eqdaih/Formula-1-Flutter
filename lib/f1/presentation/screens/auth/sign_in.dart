@@ -7,7 +7,7 @@ import '../../../data/local/local_storage.dart';
 
 class SignIn extends StatelessWidget {
   SignIn({super.key});
-  TextEditingController usernameController = TextEditingController();
+  TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   final passwordRegex = RegExp(
@@ -87,8 +87,8 @@ class SignIn extends StatelessWidget {
                       SizedBox(height: 30),
                       CustomTextField(
                         isPassword: false,
-                        hint: "Username",
-                        controller: usernameController,
+                        hint: "Email",
+                        controller: emailController,
                         validator: (email) {
                           if (email == null || email.isEmpty) {
                             return 'Please enter your email';
@@ -177,7 +177,7 @@ class SignIn extends StatelessWidget {
 
   login(BuildContext context) async {
     if (_formKey.currentState!.validate()) {
-      await LocalStorageData().saveEmail(usernameController.text);
+      await LocalStorageData().saveUsername(emailController.text);
       Navigator.pushReplacementNamed(context, Routes.home);
     }
   }

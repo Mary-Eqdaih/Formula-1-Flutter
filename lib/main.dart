@@ -14,7 +14,7 @@ import 'package:provider/provider.dart';
 import 'f1/presentation/screens/home/home_screen.dart';
 import 'f1/presentation/screens/notes/notes.dart';
 
-void main()async {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await NotesDB.init();
   runApp(MyApp());
@@ -57,13 +57,10 @@ class _MyAppState extends State<MyApp> {
       providers: [
         ChangeNotifierProvider(create: (_) => F1Provider()..init()),
         ChangeNotifierProvider(create: (_) => NotesProvider()..fetchNotes()),
-
       ],
 
       child: MaterialApp(
-        theme: ThemeData(
-          fontFamily: 'TitilliumWeb',
-        ),
+        theme: ThemeData(fontFamily: 'TitilliumWeb'),
         routes: {
           Routes.signIn: (context) => SignIn(),
           Routes.signUp: (context) => SignUp(),
@@ -73,7 +70,6 @@ class _MyAppState extends State<MyApp> {
           Routes.notes: (context) => Notes(),
           Routes.aboutF1: (context) => aboutF1(),
           Routes.addNote: (context) => AddNote(),
-
         },
         debugShowCheckedModeBanner: false,
         // home: HomeScreen(),

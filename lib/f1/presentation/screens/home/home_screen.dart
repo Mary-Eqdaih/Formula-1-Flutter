@@ -88,12 +88,16 @@ class _HomeScreenState extends State<HomeScreen> {
                   await LocalStorageData().clearEmail();
                   Navigator.pushNamedAndRemoveUntil(context, Routes.signIn, (_) => false);
                   break;
+
+
+
               }
 
             },
             itemBuilder: (context) => const [
               PopupMenuItem(value: 'about',  child: ListTile(leading: Icon(Icons.info_outline), title: Text('About F1'))),
               PopupMenuItem(value: 'logout', child: ListTile(title: Text('Logout'),leading: Icon(Icons.logout),)),
+
 
             ],
           ),

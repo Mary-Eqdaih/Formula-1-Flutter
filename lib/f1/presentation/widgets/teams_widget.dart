@@ -114,7 +114,7 @@ class TeamsWidget extends StatelessWidget {
     );
   }
   Future<void> openWikipedia(TeamsModel team) async {
-    final primary = Uri.tryParse(team.wikiUrl ?? '');
+    final primary = Uri.tryParse(team.url ?? '');
     final uri = primary ?? Uri.parse(
       'https://en.wikipedia.org/w/index.php?search=${Uri.encodeComponent(team.teamName)}',
     );

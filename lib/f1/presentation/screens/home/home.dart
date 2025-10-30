@@ -12,7 +12,7 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  String? userEmail;
+  String? userName;
   RaceInfoModel? latestRace;
   RaceInfoModel? nextRace;
   bool loading = true;
@@ -25,9 +25,9 @@ class _HomeState extends State<Home> {
   }
 
   loadEmail() async {
-    final savedEmail = await LocalStorageData().getSavedEmail();
+    final savedUserName = await LocalStorageData().getSUsername();
     setState(() {
-      userEmail = savedEmail;
+      userName = savedUserName;
     });
   }
 
@@ -69,7 +69,7 @@ class _HomeState extends State<Home> {
             ),
             SizedBox(width: 5),
             Text(
-              "${userEmail ?? 'Guest'}",
+              "${userName ?? 'Guest'}",
               style: TextStyle(
                 color: Colors.yellow,
                 fontSize: 23,

@@ -1,21 +1,22 @@
 class TeamsModel {
+  final int id; // new numeric ID (for local or API use)
+  final String constructorId; // e.g. "ferrari"
   final String teamName;
   final String nationality;
   final String logo;
-  final String constructorId;
-  final String wikiUrl;
+  final String url;
 
   TeamsModel({
+    required this.id,
+    required this.constructorId,
     required this.teamName,
     required this.nationality,
     required this.logo,
-    required this.constructorId,
-    required this.wikiUrl,
+    required this.url,
   });
 
-  factory TeamsModel.fromJson(Map<String, dynamic> json) {
+  factory TeamsModel.fromJson(Map<String, dynamic> json ,{int? index}) {
     final name = json['name'] ?? '';
-
     // 🏁 Map API team names to your asset file names
     const logos = {
       'Mercedes': 'assets/images/Mercedes.svg',
@@ -29,9 +30,9 @@ class TeamsModel {
       'RB F1 Team': 'assets/images/RB.svg',
       'Sauber': 'assets/images/Kick Sauber.png',
     };
-
     return TeamsModel(
-      wikiUrl: json["url"],
+      id: index ?? json['id'] ?? 0,
+      url: json["url"],
       constructorId: json["constructorId"],
       teamName: name,
       nationality: json['nationality'] ?? '',
