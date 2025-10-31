@@ -8,8 +8,6 @@ class Routes {
     static const String notes = "/notes";
     static const String aboutF1 = "/aboutF1";
     static const String addNote = "/addNote";
-    static const String remoteNotes = '/remoteNotes';
-    static const raceSchedule = '/raceSchedule';
 
 
 }

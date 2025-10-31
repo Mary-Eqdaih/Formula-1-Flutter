@@ -134,7 +134,7 @@ class NotesWidget extends StatelessWidget {
                                 Navigator.pop(context);
                               },
                               child: Text(
-                                "Save",
+                                "Edit",
                                 style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   color: Colors.white,

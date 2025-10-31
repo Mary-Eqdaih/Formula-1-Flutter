@@ -163,6 +163,24 @@ This makes it lightweight and usable anywhere — even while traveling or offlin
 | 🧠 **About F1** | Learn about F1 history, rules, and iconic moments |
 
 ---
+## 📸 UI Screenshots
+
+> Dark theme, mobile-first UI — built for F1 fans.  
+> Tap any image to view full size.
+
+| Home | Team Details | Favorites | About F1 |
+|---|---|---|---|
+| ![Home](assets/screenshots/home.png) | ![Team Details](assets/screenshots/team_details.png) | ![Favorites](assets/screenshots/favorites.png) | ![About F1](assets/screenshots/about_f1.png) |
+
+| Add Note | Edit Note | Notes List | Notes After Edit |
+|---|---|---|---|
+| ![Add Note](assets/screenshots/add_note.png) | ![Edit Note](assets/screenshots/edit_note.png) | ![Notes](assets/screenshots/notes.png) | ![After Edit](assets/screenshots/notes_after_edit.png) |
+
+| Sign In | Sign Up |
+|---|---|
+| ![Sign In](assets/screenshots/sign_in.png) | ![Sign Up](assets/screenshots/sign_up.png) |
+
+---
 
 ## 🌍 Why Formula 1?
 
