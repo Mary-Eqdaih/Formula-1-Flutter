@@ -182,6 +182,11 @@ Teams | Team Details | Favorites | About F1 |
 
 
 ---
+## 🎥 Demo
+
+[![Watch the demo](assets/screenshots/home.png)](https://drive.google.com/file/d/1mU7Wwq-wfDZV2jYkW4Lea2BsboVoP8nZ/view?usp=drivesdk)
+
+---
 
 ## 🌍 Why Formula 1?
 
