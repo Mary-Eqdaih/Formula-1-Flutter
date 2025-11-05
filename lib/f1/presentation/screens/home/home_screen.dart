@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:formula1_fantasy/f1/data/firebase/firebase.dart';
 import 'package:formula1_fantasy/f1/data/local/local_storage.dart';
 import 'package:formula1_fantasy/f1/presentation/providers/f1_provider.dart';
 import 'package:formula1_fantasy/f1/presentation/screens/home/home.dart';
@@ -20,7 +21,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     var teamsProvider = Provider.of<F1Provider>(context);
-    final List<Widget> screens = [Home(), Teams(), ];
+    final List<Widget> screens = [Home(), Teams()];
     const f1Red = Color(0xFFE10600);
     const darkBg = Color(0xFF0F0F10);
 
@@ -47,7 +48,11 @@ class _HomeScreenState extends State<HomeScreen> {
         onPressed: () {
           Navigator.pushNamed(context, Routes.notes);
         },
-        child: const Icon(Icons.note_add,color: Colors.white,fontWeight: FontWeight.bold,),
+        child: const Icon(
+          Icons.note_add,
+          color: Colors.white,
+          fontWeight: FontWeight.bold,
+        ),
       ),
 
       appBar: AppBar(
@@ -85,20 +90,30 @@ class _HomeScreenState extends State<HomeScreen> {
                   Navigator.pushNamed(context, Routes.aboutF1); // open About F1
                   break;
                 case 'logout':
-                  await LocalStorageData().clearEmail();
-                  Navigator.pushNamedAndRemoveUntil(context, Routes.signIn, (_) => false);
+                  // await LocalStorageData().clearEmail();
+                  FirebaseAuthServices.signOut();
+                  Navigator.pushReplacementNamed(
+                    context,
+                    Routes.signIn,
+                  );
                   break;
-
-
-
               }
-
             },
             itemBuilder: (context) => const [
-              PopupMenuItem(value: 'about',  child: ListTile(leading: Icon(Icons.info_outline), title: Text('About F1'))),
-              PopupMenuItem(value: 'logout', child: ListTile(title: Text('Logout'),leading: Icon(Icons.logout),)),
-
-
+              PopupMenuItem(
+                value: 'about',
+                child: ListTile(
+                  leading: Icon(Icons.info_outline),
+                  title: Text('About F1'),
+                ),
+              ),
+              PopupMenuItem(
+                value: 'logout',
+                child: ListTile(
+                  title: Text('Logout'),
+                  leading: Icon(Icons.logout),
+                ),
+              ),
             ],
           ),
         ],

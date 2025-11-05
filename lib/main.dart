@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:formula1_fantasy/f1/cubit/auth_cubit.dart';
 import 'package:formula1_fantasy/f1/data/local/local_storage.dart';
 import 'package:formula1_fantasy/f1/data/local/notes_DB.dart';
 import 'package:formula1_fantasy/f1/presentation/providers/f1_provider.dart';
@@ -13,9 +15,12 @@ import 'package:formula1_fantasy/routes/routes.dart';
 import 'package:provider/provider.dart';
 import 'f1/presentation/screens/home/home_screen.dart';
 import 'f1/presentation/screens/notes/notes.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await NotesDB.init();
   runApp(MyApp());
 }
@@ -28,7 +33,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  String? savedEmail;
+  String? username;
   bool isLoading = true;
 
   @override
@@ -38,11 +43,11 @@ class _MyAppState extends State<MyApp> {
   }
 
   void checkUser() async {
-    final email = await LocalStorageData().getSavedEmail();
+    final user = await LocalStorageData().getSUsername();
     setState(() {
-      savedEmail = email;
+      username = user;
       isLoading = false;
-    });
+    }) ;
   }
 
   @override
@@ -59,21 +64,24 @@ class _MyAppState extends State<MyApp> {
         ChangeNotifierProvider(create: (_) => NotesProvider()..fetchNotes()),
       ],
 
-      child: MaterialApp(
-        theme: ThemeData(fontFamily: 'TitilliumWeb'),
-        routes: {
-          Routes.signIn: (context) => SignIn(),
-          Routes.signUp: (context) => SignUp(),
-          Routes.home: (context) => HomeScreen(),
-          Routes.teamDetails: (context) => TeamDetails(),
-          Routes.favs: (context) => Favorites(),
-          Routes.notes: (context) => Notes(),
-          Routes.aboutF1: (context) => aboutF1(),
-          Routes.addNote: (context) => AddNote(),
-        },
-        debugShowCheckedModeBanner: false,
-        // home: HomeScreen(),
-        home: savedEmail == null ? SignIn() : HomeScreen(),
+      child: BlocProvider<AuthCubit>(
+        create: (_) => AuthCubit(),
+        child: MaterialApp(
+          theme: ThemeData(fontFamily: 'TitilliumWeb'),
+          routes: {
+            Routes.signIn: (context) => SignIn(),
+            Routes.signUp: (context) => SignUp(),
+            Routes.home: (context) => HomeScreen(),
+            Routes.teamDetails: (context) => TeamDetails(),
+            Routes.favs: (context) => Favorites(),
+            Routes.notes: (context) => Notes(),
+            Routes.aboutF1: (context) => aboutF1(),
+            Routes.addNote: (context) => AddNote(),
+          },
+          debugShowCheckedModeBanner: false,
+          // home: HomeScreen(),
+          home: username == null ? SignIn() : HomeScreen(),
+        ),
       ),
     );
   }
