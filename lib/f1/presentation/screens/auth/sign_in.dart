@@ -8,14 +8,29 @@ import 'package:formula1_fantasy/routes/routes.dart';
 
 import '../../../data/local/local_storage.dart';
 
-class SignIn extends StatelessWidget {
+class SignIn extends StatefulWidget {
   SignIn({super.key});
+
+  @override
+  State<SignIn> createState() => _SignInState();
+}
+
+class _SignInState extends State<SignIn> {
   TextEditingController emailController = TextEditingController();
+
   TextEditingController passwordController = TextEditingController();
+
   final _formKey = GlobalKey<FormState>();
+
   final passwordRegex = RegExp(
     r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{8,}$',
   );
+
+  @override
+  void initState() {
+    super.initState();
+    context.read<AuthCubit>().checkIfLoggedIn();
+  }
 
   @override
   Widget build(BuildContext context) {

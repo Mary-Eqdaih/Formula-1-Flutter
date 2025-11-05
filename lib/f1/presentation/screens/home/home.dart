@@ -1,5 +1,6 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:formula1_fantasy/f1/data/local/local_storage.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formula1_fantasy/f1/data/models/race_info_model.dart';
 import 'package:formula1_fantasy/f1/data/remote/f1_api.dart';
 import 'package:formula1_fantasy/f1/presentation/widgets/race_widget.dart';
@@ -12,7 +13,6 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  String? userName;
   RaceInfoModel? latestRace;
   RaceInfoModel? nextRace;
   bool loading = true;
@@ -21,15 +21,11 @@ class _HomeState extends State<Home> {
   void initState() {
     super.initState();
     fetchData();
-    loadEmail();
+
   }
 
-  loadEmail() async {
-    final savedUserName = await LocalStorageData().getSUsername();
-    setState(() {
-      userName = savedUserName;
-    });
-  }
+
+
 
   fetchData() async {
     final latest = await F1Api.fetchLatestRace();
@@ -47,6 +43,8 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
+    final user = FirebaseAuth.instance.currentUser;
+
     const f1Red = Color(0xFFE10600);
     const gray = Color(0xFF424242);
 
@@ -69,7 +67,7 @@ class _HomeState extends State<Home> {
             ),
             SizedBox(width: 5),
             Text(
-              "${userName ?? 'Guest'}",
+              user?.displayName ?? "Guest",
               style: TextStyle(
                 color: Colors.yellow,
                 fontSize: 23,

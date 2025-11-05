@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formula1_fantasy/f1/cubit/auth_cubit.dart';
-import 'package:formula1_fantasy/f1/data/local/local_storage.dart';
 import 'package:formula1_fantasy/f1/data/local/notes_DB.dart';
 import 'package:formula1_fantasy/f1/presentation/providers/f1_provider.dart';
 import 'package:formula1_fantasy/f1/presentation/providers/notes_provider.dart';
@@ -33,31 +32,10 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  String? username;
-  bool isLoading = true;
-
-  @override
-  void initState() {
-    super.initState();
-    checkUser();
-  }
-
-  void checkUser() async {
-    final user = await LocalStorageData().getSUsername();
-    setState(() {
-      username = user;
-      isLoading = false;
-    }) ;
-  }
 
   @override
   Widget build(BuildContext context) {
-    if (isLoading) {
-      return const MaterialApp(
-        debugShowCheckedModeBanner: false,
-        home: Scaffold(body: Center(child: CircularProgressIndicator())),
-      );
-    }
+
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => F1Provider()..init()),
@@ -65,7 +43,7 @@ class _MyAppState extends State<MyApp> {
       ],
 
       child: BlocProvider<AuthCubit>(
-        create: (_) => AuthCubit(),
+        create: (_) => AuthCubit()..checkIfLoggedIn(),
         child: MaterialApp(
           theme: ThemeData(fontFamily: 'TitilliumWeb'),
           routes: {
@@ -80,7 +58,7 @@ class _MyAppState extends State<MyApp> {
           },
           debugShowCheckedModeBanner: false,
           // home: HomeScreen(),
-          home: username == null ? SignIn() : HomeScreen(),
+          home:SignIn(),
         ),
       ),
     );

@@ -229,10 +229,10 @@ class SignUp extends StatelessWidget {
 
   signUp(BuildContext context) async {
     if (_formKey.currentState!.validate()) {
-      LocalStorageData().saveUsername(usernameController.text);
       context.read<AuthCubit>().signUp(
         emailController.text,
         passwordController.text,
+        usernameController.text
       );
     }
   }

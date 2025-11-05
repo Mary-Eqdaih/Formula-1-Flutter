@@ -4,7 +4,7 @@ class AuthStates {}
 class AuthInitialState extends AuthStates{}
 class AuthLoadingState extends AuthStates{}
 class AuthSuccessState extends AuthStates{
-  final UserCredential user;
+  final User user;
   AuthSuccessState(this.user);
 }
 class AuthErrorState extends AuthStates{

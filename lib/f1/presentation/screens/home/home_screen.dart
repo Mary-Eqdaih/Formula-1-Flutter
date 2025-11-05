@@ -4,6 +4,7 @@ import 'package:formula1_fantasy/f1/data/firebase/firebase.dart';
 import 'package:formula1_fantasy/f1/data/local/local_storage.dart';
 import 'package:formula1_fantasy/f1/presentation/providers/f1_provider.dart';
 import 'package:formula1_fantasy/f1/presentation/screens/home/home.dart';
+import 'package:formula1_fantasy/f1/presentation/screens/settings/settings.dart';
 import 'package:formula1_fantasy/routes/routes.dart';
 import 'package:provider/provider.dart';
 import '../teams/teams.dart';
@@ -21,7 +22,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     var teamsProvider = Provider.of<F1Provider>(context);
-    final List<Widget> screens = [Home(), Teams()];
+    final List<Widget> screens = [Home(), Teams(),Settings()];
     const f1Red = Color(0xFFE10600);
     const darkBg = Color(0xFF0F0F10);
 
@@ -36,6 +37,7 @@ class _HomeScreenState extends State<HomeScreen> {
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home_filled), label: "Home"),
           BottomNavigationBarItem(icon: Icon(Icons.flag), label: "Teams"),
+          BottomNavigationBarItem(icon: Icon(Icons.settings), label: "Settings"),
           // BottomNavigationBarItem(
           //   icon: Icon(Icons.leaderboard),
           //   label: "Leaderboard",
@@ -56,6 +58,7 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
 
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         backgroundColor: darkBg,
         elevation: 0,
         title: Row(
@@ -90,7 +93,6 @@ class _HomeScreenState extends State<HomeScreen> {
                   Navigator.pushNamed(context, Routes.aboutF1); // open About F1
                   break;
                 case 'logout':
-                  // await LocalStorageData().clearEmail();
                   FirebaseAuthServices.signOut();
                   Navigator.pushReplacementNamed(
                     context,
