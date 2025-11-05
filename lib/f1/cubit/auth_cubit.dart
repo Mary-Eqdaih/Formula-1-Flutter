@@ -58,9 +58,11 @@ class AuthCubit extends Cubit<AuthStates> {
     emit(AuthInitialState());
   }
 
-  updateUserName(String name)async{
-    emit(AuthLoadingState());
-     await FirebaseAuth.instance.currentUser?.updateDisplayName(name);
-     emit(AuthSuccessState(FirebaseAuth.instance.currentUser!));
-  }
+
+
+  // updateUserName(String name)async{
+  //   emit(AuthLoadingState());
+  //    await FirebaseAuth.instance.currentUser?.updateDisplayName(name);
+  //    emit(AuthSuccessState(FirebaseAuth.instance.currentUser!));
+  // }
 }
