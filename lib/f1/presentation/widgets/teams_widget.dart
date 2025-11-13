@@ -4,7 +4,6 @@ import 'package:formula1_fantasy/f1/data/models/teams_model.dart';
 import 'package:formula1_fantasy/f1/presentation/providers/f1_provider.dart';
 import 'package:formula1_fantasy/routes/routes.dart';
 import 'package:provider/provider.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class TeamsWidget extends StatelessWidget {
   const TeamsWidget({
@@ -38,8 +37,8 @@ class TeamsWidget extends StatelessWidget {
           child: Row(
             children: [
               Container(
-                width: 80,
-                height: 80,
+                width: 60,
+                height: 60,
                 padding: const EdgeInsets.all(10),
                 decoration: BoxDecoration(
                   color: Colors.white,
@@ -72,24 +71,7 @@ class TeamsWidget extends StatelessWidget {
                         fontSize: 13,
                       ),
                     ),
-                    TextButton.icon(
 
-                      onPressed: () {
-                        openWikipedia(model);
-                      },
-                      icon: const Icon(Icons.open_in_new, size: 16, color: Colors.white70),
-                      label: const Text(
-                        'See more',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontFamily: 'TitilliumWeb',
-                          fontWeight: FontWeight.w700,
-                        ),
-                      ),
-                      style: TextButton.styleFrom(
-                        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                      ),
-                    ),
                   ],
                 ),
               ),
@@ -113,12 +95,5 @@ class TeamsWidget extends StatelessWidget {
       ),
     );
   }
-  Future<void> openWikipedia(TeamsModel team) async {
-    final primary = Uri.tryParse(team.url ?? '');
-    final uri = primary ?? Uri.parse(
-      'https://en.wikipedia.org/w/index.php?search=${Uri.encodeComponent(team.teamName)}',
-    );
 
-    await launchUrl(uri, mode: LaunchMode.inAppBrowserView);
-  }
 }

@@ -11,12 +11,23 @@ class F1Provider extends ChangeNotifier {
   List<TeamsModel> favs = [];
   final Map<String, List<DriverModel>> driversByTeam = {};
 
+
+  void init()async{
+    await fetchTeams();
+    await loadFavorites();
+  }
+
+  fetchTeams() async {
+    var fetchedTeams = await TeamsApi().fetchTeams();
+    teams = fetchedTeams;
+    notifyListeners();
+  }
+
+
   List<DriverModel> driversFor(String constructorId) {
     return driversByTeam[constructorId] ?? const [];
   }
   // returns all drivers for a given team (by ID).
-
-
   Future<void> fetchDriversFor(String constructorId) async {
     // avoid refetching if already cached
     if (driversByTeam.containsKey(constructorId)) return;
@@ -24,10 +35,9 @@ class F1Provider extends ChangeNotifier {
     driversByTeam[constructorId] = fetched;
     notifyListeners();
   }
-  void init()async{
-   await fetchTeams();
-   await loadFavorites();
-  }
+
+
+
 
   addToFavorites(TeamsModel team) {
     favs.add(team);
@@ -43,11 +53,7 @@ class F1Provider extends ChangeNotifier {
 
 
 
-  fetchTeams() async {
-    var fetchedTeams = await TeamsApi().fetchTeams();
-    teams = fetchedTeams;
-    notifyListeners();
-  }
+
 
 
 
@@ -65,5 +71,9 @@ class F1Provider extends ChangeNotifier {
     favs = teams.where((team) => savedIds.contains(team.constructorId)).toList();
     notifyListeners();
   }
+
+
+
+
 }
 

@@ -6,6 +6,7 @@ class TeamsModel {
   final String nationality;
   final String logo;
   final String url;
+  final String carImage;
 
   TeamsModel({
     required this.id,
@@ -14,6 +15,9 @@ class TeamsModel {
     required this.nationality,
     required this.logo,
     required this.url,
+    required this.carImage,
+
+
   });
 
   factory TeamsModel.fromJson(Map<String, dynamic> json ,{int? index}) {
@@ -31,7 +35,23 @@ class TeamsModel {
       'RB F1 Team': 'assets/images/RB.svg',
       'Sauber': 'assets/images/Kick Sauber.png',
     };
+
+    const cars = {
+      'Mercedes': 'assets/images/cars/mercedes.jpg',
+      'Red Bull': 'assets/images/cars/redbull.jpg',
+      'Ferrari': 'assets/images/cars/ferrari.jpg',
+      'McLaren': 'assets/images/cars/mclaren.jpg',
+      'Aston Martin': 'assets/images/cars/aston_martin.jpg',
+      'Alpine F1 Team': 'assets/images/cars/alpine.jpg',
+      'Williams': 'assets/images/cars/williams.jpg',
+      'Haas F1 Team': 'assets/images/cars/haas.jpg',
+      'RB F1 Team': 'assets/images/cars/racing_bulls.jpg',
+      'Sauber': 'assets/images/cars/kick_sauber.jpg',
+    };
+
+
     return TeamsModel(
+      carImage: cars[name] ?? 'assets/images/cars/ferrari.jpg' ,
       id: index ?? json['id'] ?? 0,
       url: json["url"],
       constructorId: json["constructorId"],

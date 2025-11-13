@@ -22,18 +22,30 @@ class DriverWidget extends StatelessWidget {
       padding: const EdgeInsets.all(16),
       child: Row(
         children: [
+          // Container(
+          //   width: 100,
+          //   height: 100,
+          //   padding: const EdgeInsets.all(10),
+          //   decoration: BoxDecoration(
+          //     color: Colors.white,
+          //     borderRadius: BorderRadius.circular(50),
+          //   ),
+          //   child: Image.asset(model.image, fit: BoxFit.contain),
+          // ),
+
+
           CircleAvatar(
             radius: 45,
-            backgroundColor: Colors.white,
-            child: Text(
-              _initials(model.name),
-              style: const TextStyle(
-                color: dark,
-                fontWeight: FontWeight.w800,
-                fontSize: 18,
-                fontFamily: 'TitilliumWeb',
-              ),
-            ),
+            backgroundImage: AssetImage(model.image),
+            // Text(
+            //   _initials(model.name),
+            //   style: const TextStyle(
+            //     color: dark,
+            //     fontWeight: FontWeight.w800,
+            //     fontSize: 18,
+            //     fontFamily: 'TitilliumWeb',
+            //   ),
+            // ),
           ),
           const SizedBox(width: 25),
 
@@ -52,7 +64,7 @@ class DriverWidget extends StatelessWidget {
                         style: const TextStyle(
                           color: Colors.white,
                           fontFamily: 'TitilliumWeb',
-                          fontSize: 16,
+                          fontSize: 18,
                           fontWeight: FontWeight.w800,
                         ),
                       ),

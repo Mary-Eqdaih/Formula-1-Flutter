@@ -5,13 +5,14 @@ import 'package:provider/provider.dart';
 import 'package:formula1_fantasy/f1/data/models/teams_model.dart';
 import 'package:formula1_fantasy/f1/presentation/providers/f1_provider.dart';
 import 'package:formula1_fantasy/f1/presentation/widgets/driver_widget.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class TeamDetails extends StatefulWidget {
   const TeamDetails({super.key});
 
   static const darkBg = Color(0xFF0F0F10);
   static const cardColor = Color(0xFF18191A);
-  static const f1Red   = Color(0xFFE10600);
+  static const f1Red = Color(0xFFE10600);
 
   @override
   State<TeamDetails> createState() => _TeamDetailsState();
@@ -54,8 +55,9 @@ class _TeamDetailsState extends State<TeamDetails> {
         padding: const EdgeInsets.all(16),
         child: Column(
           children: [
+            Image.asset(team.carImage),
 
-
+            SizedBox(height: 20),
             Container(
               decoration: BoxDecoration(
                 color: TeamDetails.cardColor,
@@ -66,8 +68,8 @@ class _TeamDetailsState extends State<TeamDetails> {
               child: Row(
                 children: [
                   Container(
-                    width: 64,
-                    height: 64,
+                    width: 70,
+                    height: 70,
                     padding: const EdgeInsets.all(8),
                     decoration: BoxDecoration(
                       color: Colors.white,
@@ -100,15 +102,44 @@ class _TeamDetailsState extends State<TeamDetails> {
                             fontSize: 14,
                           ),
                         ),
+                        TextButton.icon(
+                          onPressed: () {
+                            openWikipedia(team);
+                          },
+                          icon: const Icon(
+                            Icons.open_in_new,
+                            size: 16,
+                            color: Colors.white70,
+                          ),
+                          label: const Text(
+                            'See more',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontFamily: 'TitilliumWeb',
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
+                          style: TextButton.styleFrom(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 12,
+                              vertical: 8,
+                            ),
+                          ),
+                        ),
                       ],
                     ),
                   ),
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 10,
+                      vertical: 6,
+                    ),
                     decoration: BoxDecoration(
                       color: TeamDetails.f1Red.withOpacity(0.12),
                       borderRadius: BorderRadius.circular(20),
-                      border: Border.all(color: TeamDetails.f1Red.withOpacity(0.35)),
+                      border: Border.all(
+                        color: TeamDetails.f1Red.withOpacity(0.35),
+                      ),
                     ),
                     child: const Text(
                       'Selected Team',
@@ -123,7 +154,6 @@ class _TeamDetailsState extends State<TeamDetails> {
                 ],
               ),
             ),
-
 
             const SizedBox(height: 20),
             Align(
@@ -140,7 +170,6 @@ class _TeamDetailsState extends State<TeamDetails> {
             ),
             const SizedBox(height: 10),
 
-
             if (drivers.isEmpty)
               const SizedBox.shrink()
             else
@@ -155,5 +184,16 @@ class _TeamDetailsState extends State<TeamDetails> {
         ),
       ),
     );
+  }
+
+  Future<void> openWikipedia(TeamsModel team) async {
+    final primary = Uri.tryParse(team.url);
+    final uri =
+        primary ??
+        Uri.parse(
+          'https://en.wikipedia.org/w/index.php?search=${Uri.encodeComponent(team.teamName)}',
+        );
+
+    await launchUrl(uri, mode: LaunchMode.inAppBrowserView);
   }
 }
