@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:formula1_fantasy/f1/data/models/about_F1_model.dart';
+import 'package:formula1_fantasy/f1/data/models/about_f1_model.dart';
 
 class AboutF1Widget extends StatelessWidget {
   const AboutF1Widget({super.key, required this.model});
   final AboutF1Model model;
   @override
   Widget build(BuildContext context) {
-    const darkBg = Color(0xFF0F0F10);
     const card = Color(0xFF18191A);
     const f1Red = Color(0xFFE10600);
     return Padding(

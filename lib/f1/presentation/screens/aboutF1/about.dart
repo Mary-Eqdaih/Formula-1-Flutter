@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:formula1_fantasy/f1/data/models/about_F1_model.dart';
+import 'package:formula1_fantasy/f1/data/models/about_f1_model.dart';
 import 'package:formula1_fantasy/f1/presentation/widgets/aboutF1_widget.dart';
 
 class aboutF1 extends StatelessWidget {
@@ -8,9 +8,6 @@ class aboutF1 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     const darkBg = Color(0xFF0F0F10);
-    const card = Color(0xFF18191A);
-    const f1Red = Color(0xFFE10600);
-
     List<AboutF1Model> aboutF1 = [
       AboutF1Model(
         title: 'Origins (1950)',

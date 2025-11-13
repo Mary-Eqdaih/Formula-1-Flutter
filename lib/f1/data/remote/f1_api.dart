@@ -48,8 +48,6 @@
       final country = race['Circuit']['Location']['country'];
       final locality = race['Circuit']['Location']['locality'];
       final date = race['date'];
-      final time = (race['time'] ?? '00:00:00Z') as String;
-      final dt = DateTime.parse('${date}T$time').toUtc();
 
       return RaceInfoModel(
         title: raceName,

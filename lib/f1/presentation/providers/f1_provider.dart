@@ -14,8 +14,11 @@ class F1Provider extends ChangeNotifier {
   List<DriverModel> driversFor(String constructorId) {
     return driversByTeam[constructorId] ?? const [];
   }
+  // returns all drivers for a given team (by ID).
+
+
   Future<void> fetchDriversFor(String constructorId) async {
-    // Avoid refetching if already cached
+    // avoid refetching if already cached
     if (driversByTeam.containsKey(constructorId)) return;
     final fetched = await DriversApi().fetchDrivers(constructorId);
     driversByTeam[constructorId] = fetched;

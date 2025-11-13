@@ -22,6 +22,8 @@ class _TeamDetailsState extends State<TeamDetails> {
   void initState() {
     super.initState();
     // Fetch after first frame so ModalRoute is available.
+    // Runs once when the screen is first created.
+    // Uses ModalRoute.of(context) to access the arguments passed when navigating to this page (the
     WidgetsBinding.instance.addPostFrameCallback((_) {
       final team = ModalRoute.of(context)!.settings.arguments as TeamsModel;
       context.read<F1Provider>().fetchDriversFor(team.constructorId);

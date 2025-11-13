@@ -1,28 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:formula1_fantasy/f1/data/models/notes_model.dart';
 import 'package:formula1_fantasy/f1/presentation/providers/notes_provider.dart';
-import 'package:formula1_fantasy/f1/presentation/widgets/Custom_text_field.dart';
 import 'package:formula1_fantasy/f1/presentation/widgets/f1_text_field.dart';
-import 'package:formula1_fantasy/routes/routes.dart';
 import 'package:provider/provider.dart';
 
-
 class NotesWidget extends StatelessWidget {
-   NotesWidget({super.key, required this.model,this.onDismissed}){
+  NotesWidget({super.key, required this.model, this.onDismissed}) {
     titleController.text = model.title;
     contentController.text = model.content;
   }
 
-   TextEditingController titleController = TextEditingController();
-   TextEditingController contentController = TextEditingController();
+  TextEditingController titleController = TextEditingController();
+  TextEditingController contentController = TextEditingController();
   final NotesModel model;
   final void Function(DismissDirection)? onDismissed;
 
-
   @override
   Widget build(BuildContext context) {
-
-
     const darkBg = Color(0xFF0F0F10);
     const f1Red = Color(0xFFE10600);
     return Dismissible(
@@ -46,7 +40,7 @@ class NotesWidget extends StatelessWidget {
         ),
       ),
 
-      key:  UniqueKey(),
+      key: UniqueKey(),
       child: Container(
         margin: const EdgeInsets.only(bottom: 12),
         decoration: BoxDecoration(
@@ -64,19 +58,27 @@ class NotesWidget extends StatelessWidget {
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
                   fontSize: 20,
-                  fontFamily: "TitilliumWeb"
+                  fontFamily: "TitilliumWeb",
                 ),
               ),
               SizedBox(height: 12),
               Text(
                 model.content,
-                style: const TextStyle(color: Colors.white, fontSize: 16,fontFamily: "TitilliumWeb",letterSpacing: 1,height: 1.8),
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 16,
+                  fontFamily: "TitilliumWeb",
+                  letterSpacing: 1,
+                  height: 1.8,
+                ),
               ),
             ],
           ),
-          trailing: Text(model.date, style: TextStyle(color: Colors.white,fontFamily: "TitilliumWeb")),
+          trailing: Text(
+            model.date,
+            style: TextStyle(color: Colors.white, fontFamily: "TitilliumWeb"),
+          ),
           onTap: () {
-
             showModalBottomSheet(
               isScrollControlled: true,
               context: context,
@@ -118,18 +120,18 @@ class NotesWidget extends StatelessWidget {
                                   side: BorderSide.none,
                                 ),
                               ),
-                              onPressed: ()  {
-                  
+                              onPressed: () {
                                 NotesModel updatedNote = NotesModel(
                                   title: titleController.text,
                                   content: contentController.text,
                                   date:
-                                  "${DateTime.now().day}/${DateTime.now().month}",
+                                      "${DateTime.now().day}/${DateTime.now().month}",
                                   id: model.id,
                                 );
-                  
+
                                 Provider.of<NotesProvider>(
-                                  context,listen: false,
+                                  context,
+                                  listen: false,
                                 ).updateNote(updatedNote);
                                 Navigator.pop(context);
                               },
@@ -157,4 +159,3 @@ class NotesWidget extends StatelessWidget {
     );
   }
 }
-

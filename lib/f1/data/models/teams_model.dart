@@ -1,5 +1,6 @@
 class TeamsModel {
-  final int id; // new numeric ID (for local or API use)
+  final int id; // new numeric ID (for API use)
+  // fetch detailed team data from the API when a user opens a team’s detail screen.
   final String constructorId; // e.g. "ferrari"
   final String teamName;
   final String nationality;

@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formula1_fantasy/f1/cubit/auth_state.dart';
+import 'package:formula1_fantasy/f1/data/firebase/firebase.dart';
 
 class AuthCubit extends Cubit<AuthStates> {
   AuthCubit() : super(AuthInitialState());
@@ -14,14 +15,11 @@ class AuthCubit extends Cubit<AuthStates> {
   }
 
   // Sign in
-  signIn(String email, String password) async {
+ Future<void> signIn(String email, String password) async {
     emit(AuthLoadingState());
     try {
-      final credential = await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: email,
-        password: password,
-      );
-      emit(AuthSuccessState(credential.user!));
+      final credential = await FirebaseAuthServices.signIn(email, password);
+      emit(AuthSuccessState(credential!.user! ));
     } on FirebaseAuthException catch (e) {
       emit(AuthErrorState(e.toString()));
       if (e.code == 'user-not-found') {
@@ -32,20 +30,17 @@ class AuthCubit extends Cubit<AuthStates> {
 
       return;
     }
+
   }
 
-  // Sign up
+  // Sign
+
 // AuthCubit
-  Future<void> signUp(String email, String password, String username) async {
+ signUp(String email, String password, String username) async {
     emit(AuthLoadingState());
     try {
-      final cred = await FirebaseAuth.instance
-          .createUserWithEmailAndPassword(email: email, password: password);
-
-      await cred.user!.updateDisplayName(username);
-      await cred.user!.reload();
-      final user = FirebaseAuth.instance.currentUser; // refreshed
-      emit(AuthSuccessState(user!));
+      final credential = await FirebaseAuthServices.signUp(email, password, username);
+      emit(AuthSuccessState(credential.user!));
     } on FirebaseAuthException catch (e) {
       emit(AuthErrorState(e.message ?? 'Registration failed'));
     }
@@ -54,7 +49,7 @@ class AuthCubit extends Cubit<AuthStates> {
 
   // sign out
   signOut() async {
-    await FirebaseAuth.instance.signOut();
+    await FirebaseAuthServices.signOut();
     emit(AuthInitialState());
   }
 

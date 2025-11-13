@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:formula1_fantasy/f1/data/models/notes_model.dart';
 import 'package:formula1_fantasy/f1/presentation/providers/notes_provider.dart';
-import 'package:formula1_fantasy/f1/presentation/widgets/Custom_text_field.dart';
 import 'package:formula1_fantasy/f1/presentation/widgets/notes_widget.dart';
 import 'package:formula1_fantasy/routes/routes.dart';
 import 'package:provider/provider.dart';

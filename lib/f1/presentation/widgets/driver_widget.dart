@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:formula1_fantasy/f1/data/models/driver_model.dart';
-import 'package:formula1_fantasy/f1/presentation/providers/f1_provider.dart';
-import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class DriverWidget extends StatelessWidget {

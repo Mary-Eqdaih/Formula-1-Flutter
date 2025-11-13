@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:formula1_fantasy/f1/cubit/auth_cubit.dart';
+import 'package:formula1_fantasy/f1/cubit/auth_state.dart';
 import 'package:formula1_fantasy/f1/data/local/notes_DB.dart';
 import 'package:formula1_fantasy/f1/presentation/providers/f1_provider.dart';
 import 'package:formula1_fantasy/f1/presentation/providers/notes_provider.dart';
@@ -32,14 +33,14 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-
   @override
   Widget build(BuildContext context) {
-
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => F1Provider()..init()),
+        // load favs + fetch teams
         ChangeNotifierProvider(create: (_) => NotesProvider()..fetchNotes()),
+        //   loads notes from db
       ],
 
       child: BlocProvider<AuthCubit>(
@@ -58,7 +59,11 @@ class _MyAppState extends State<MyApp> {
           },
           debugShowCheckedModeBanner: false,
           // home: HomeScreen(),
-          home:SignIn(),
+          home: BlocBuilder<AuthCubit,AuthStates>(builder: (BuildContext context, state) {
+
+            return state is AuthSuccessState ? HomeScreen(): SignIn();
+          },
+          ),
         ),
       ),
     );

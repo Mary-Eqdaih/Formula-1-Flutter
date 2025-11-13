@@ -115,7 +115,7 @@ UI Widgets (Consumer / Provider.of)
 
 ```bash
 # 1️⃣ Clone this repo
-git clone https://github.com/IsaacKamelQadeh/formula1_fantasy_flutter.git
+git clone https://github.com/Mary-Eqdaih/Formula-1-Flutter.git
 cd formula1_fantasy_flutter
 
 # 2️⃣ Install dependencies

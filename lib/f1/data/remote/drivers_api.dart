@@ -3,7 +3,6 @@ import 'package:http/http.dart' as http;
 import 'package:formula1_fantasy/f1/data/models/driver_model.dart';
 
 class DriversApi {
-  // Example: https://api.jolpi.ca/ergast/f1/current/constructors/ferrari/drivers.json
   static const _base = 'https://api.jolpi.ca/ergast/f1/current/constructors';
 
   Future<List<DriverModel>> fetchDrivers(String constructorId) async {
@@ -16,7 +15,7 @@ class DriversApi {
 
     final data = jsonDecode(response.body);
     final List driversJson =
-    data['MRData']['DriverTable']['Drivers']; // list of maps
+    data['MRData']['DriverTable']['Drivers']; // list of maps each map is a driver
 
     final drivers =
     driversJson.map((map) => DriverModel.fromJson(map)).toList();
