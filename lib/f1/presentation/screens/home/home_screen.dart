@@ -3,7 +3,9 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:formula1_fantasy/f1/cubit/auth_cubit.dart';
 
 import 'package:formula1_fantasy/f1/presentation/providers/f1_provider.dart';
+import 'package:formula1_fantasy/f1/presentation/screens/favorites/favorites.dart';
 import 'package:formula1_fantasy/f1/presentation/screens/home/home.dart';
+import 'package:formula1_fantasy/f1/presentation/screens/profile/profile.dart';
 import 'package:formula1_fantasy/routes/routes.dart';
 import 'package:provider/provider.dart';
 import '../teams/teams.dart';
@@ -20,8 +22,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    var teamsProvider = Provider.of<F1Provider>(context);
-    final List<Widget> screens = [Home(), Teams()];
+    final List<Widget> screens = [Home(), Teams(),Favorites(),Profile()];
     const f1Red = Color(0xFFE10600);
     const darkBg = Color(0xFF0F0F10);
 
@@ -36,6 +37,9 @@ class _HomeScreenState extends State<HomeScreen> {
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home_filled), label: "Home"),
           BottomNavigationBarItem(icon: Icon(Icons.flag), label: "Teams"),
+          BottomNavigationBarItem(icon: Icon(Icons.favorite), label: "Favorites"),
+          BottomNavigationBarItem(icon: Icon(Icons.person), label: "Profile"),
+
 
           // BottomNavigationBarItem(
           //   icon: Icon(Icons.leaderboard),
@@ -76,14 +80,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ],
         ),
         actions: [
-          IconButton(
-            icon: Badge.count(
-              count: teamsProvider.favs.length,
-              child: const Icon(Icons.favorite_border, color: Colors.white),
-            ),
-            onPressed: () => Navigator.pushNamed(context, Routes.favs),
-          ),
-          // NEW: overflow menu with Logout
+          IconButton(onPressed: (){}, icon: Icon(Icons.notifications,color: Colors.white,)),
           PopupMenuButton<String>(
             icon: const Icon(Icons.more_vert, color: Colors.white),
             onSelected: (value) async {

@@ -15,11 +15,11 @@ class AuthCubit extends Cubit<AuthStates> {
   }
 
   // Sign in
- Future<void> signIn(String email, String password) async {
+  Future<void> signIn(String email, String password) async {
     emit(AuthLoadingState());
     try {
       final credential = await FirebaseAuthServices.signIn(email, password);
-      emit(AuthSuccessState(credential!.user! ));
+      emit(AuthSuccessState(credential!.user!));
     } on FirebaseAuthException catch (e) {
       emit(AuthErrorState(e.toString()));
       if (e.code == 'user-not-found') {
@@ -30,22 +30,24 @@ class AuthCubit extends Cubit<AuthStates> {
 
       return;
     }
-
   }
 
   // Sign
 
-// AuthCubit
- signUp(String email, String password, String username) async {
+  // AuthCubit
+  signUp(String email, String password, String username) async {
     emit(AuthLoadingState());
     try {
-      final credential = await FirebaseAuthServices.signUp(email, password, username);
+      final credential = await FirebaseAuthServices.signUp(
+        email,
+        password,
+        username,
+      );
       emit(AuthSuccessState(credential.user!));
     } on FirebaseAuthException catch (e) {
       emit(AuthErrorState(e.message ?? 'Registration failed'));
     }
   }
-
 
   // sign out
   signOut() async {
@@ -53,11 +55,9 @@ class AuthCubit extends Cubit<AuthStates> {
     emit(AuthInitialState());
   }
 
-
-
-  // updateUserName(String name)async{
+  // Future<void> update(String name, String email) async {
   //   emit(AuthLoadingState());
-  //    await FirebaseAuth.instance.currentUser?.updateDisplayName(name);
-  //    emit(AuthSuccessState(FirebaseAuth.instance.currentUser!));
+  //   await FirebaseAuth.instance.currentUser!.updateDisplayName(name);
+  //   emit(AuthSuccessState(FirebaseAuth.instance.currentUser!));
   // }
 }

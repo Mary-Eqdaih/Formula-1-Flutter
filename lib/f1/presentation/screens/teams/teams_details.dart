@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
-
 import 'package:formula1_fantasy/f1/data/models/teams_model.dart';
 import 'package:formula1_fantasy/f1/presentation/providers/f1_provider.dart';
 import 'package:formula1_fantasy/f1/presentation/widgets/driver_widget.dart';
