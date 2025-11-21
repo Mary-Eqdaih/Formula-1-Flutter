@@ -7,8 +7,10 @@ class TeamsModel {
   final String logo;
   final String url;
   final String carImage;
+  final int? points;
 
   TeamsModel({
+    this.points,
     required this.id,
     required this.constructorId,
     required this.teamName,

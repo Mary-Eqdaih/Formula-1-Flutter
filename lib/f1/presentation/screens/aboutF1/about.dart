@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:formula1_fantasy/f1/data/models/about_f1_model.dart';
 import 'package:formula1_fantasy/f1/presentation/widgets/aboutF1_widget.dart';
+import 'package:formula1_fantasy/routes/routes.dart';
 
 class aboutF1 extends StatelessWidget {
   const aboutF1({super.key});

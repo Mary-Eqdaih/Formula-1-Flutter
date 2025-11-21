@@ -18,8 +18,8 @@ class CustomTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
-
-      keyboardType: TextInputType.text,
+      keyboardType: TextInputType.multiline,
+      textInputAction: TextInputAction.newline,
       validator: validator,
       controller: controller,
       obscureText: isPassword,
