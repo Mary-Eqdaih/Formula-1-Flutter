@@ -15,87 +15,95 @@ class Settings extends StatelessWidget {
     const f1Red = Color(0xFFE10600);
 
     return Scaffold(
+
       backgroundColor: darkBg,
-      appBar: AppBar(
-        backgroundColor: darkBg,
-        elevation: 0,
-        title: const Text(
-          'Settings',
-          style: TextStyle(
-            fontFamily: 'TitilliumWeb',
-            color: Colors.white,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.white),
-          onPressed: () => Navigator.pop(context),
-        ),
-      ),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.all(16),
         child: Column(
           children: [
             // User Profile Overview
-            Container(
-              padding: const EdgeInsets.all(16),
-              decoration: BoxDecoration(
-                color: cardColor,
-                borderRadius: BorderRadius.circular(16),
-              ),
-              child: Row(
-                children: [
-                  const CircleAvatar(
-                    radius: 40,
-                    backgroundImage: NetworkImage(
-                      "https://placehold.co/600x400/000000/FFFFFF/png",
+            InkWell(
+              onTap: (){
+                Navigator.pushNamed(context, Routes.profile);
+              },
+              child: Container(
+                padding: const EdgeInsets.all(16),
+                decoration: BoxDecoration(
+                  color: cardColor,
+                  borderRadius: BorderRadius.circular(16),
+                ),
+                child: Row(
+                  children: [
+                    const CircleAvatar(
+                      radius: 40,
+                      backgroundImage: NetworkImage(
+                        "https://images.unsplash.com/photo-1602043410209-d57816124451?q=80&w=1332&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+                      ),
                     ),
-                  ),
-                  const SizedBox(width: 20),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        FirebaseAuth.instance.currentUser!.displayName!,
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
+                    const SizedBox(width: 20),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          FirebaseAuth.instance.currentUser!.displayName!,
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
-                      ),
-                      Text(
-                        FirebaseAuth.instance.currentUser!.email!,
-                        style: TextStyle(color: Colors.white70, fontSize: 14),
-                      ),
-                    ],
-                  ),
-                ],
+                        Text(
+                          FirebaseAuth.instance.currentUser!.email!,
+                          style: TextStyle(color: Colors.white70, fontSize: 14),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
             const SizedBox(height: 20),
 
-            // Profile Settings Card
+
             SettingsWidget(
-              onTap: () {
-                Navigator.pushNamed(context, Routes.profile);
-              },
-              title: 'Profile Settings',
-              icon: Icons.person_outline,
-            ),
-            SettingsWidget(
+              cardTitle: "Notifications",
               onTap: () {},
               title: 'Notification Settings',
               icon: Icons.notifications,
             ),
             SettingsWidget(
+              cardTitle: "Privacy Settings",
               onTap: () {},
-              title: 'Privacy Settings',
+              title: 'Privacy ',
               icon: Icons.lock_outline,
             ),
             SettingsWidget(
+              cardTitle: "Change of Language",
               onTap: () {},
-              title: 'Language Settings',
+              title: 'Language ',
               icon: Icons.language,
+
+            ),
+            SettingsWidget(
+              cardTitle: "Favorite Teams",
+              onTap: () {
+                Navigator.pushNamed(context, Routes.favs);
+              },
+              title: 'Favorites ',
+              icon: Icons.favorite,
+
+            ),    SettingsWidget(
+              cardTitle: "Send Us Feedback",
+              onTap: () {},
+              title: 'Other ',
+              icon: Icons.wechat_outlined,
+
+            ), SettingsWidget(
+              color: f1Red,
+              cardTitle: "Delete",
+              onTap: () {},
+              title: 'Delete Account ',
+              icon: Icons.delete_forever,
+
             ),
 
             const SizedBox(height: 20),

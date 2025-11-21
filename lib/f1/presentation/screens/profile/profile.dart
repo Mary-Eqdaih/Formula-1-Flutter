@@ -4,8 +4,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:formula1_fantasy/f1/presentation/providers/f1_provider.dart';
 import 'package:formula1_fantasy/f1/presentation/widgets/Custom_text_field.dart';
 import 'package:formula1_fantasy/f1/presentation/widgets/teams_profile_widget.dart';
+import 'package:formula1_fantasy/routes/routes.dart';
 import 'package:provider/provider.dart';
-
 
 class Profile extends StatelessWidget {
   Profile({super.key});
@@ -23,7 +23,6 @@ class Profile extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        // automaticallyImplyLeading: false,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: Colors.white),
           onPressed: () {
@@ -52,6 +51,37 @@ class Profile extends StatelessWidget {
             onPressed: () {},
             icon: Icon(Icons.notifications, color: Colors.white),
           ),
+          InkWell(
+            onTap: () {
+              Navigator.pushNamed(context, Routes.profile);
+            },
+            child: CircleAvatar(
+              radius: 10,
+              backgroundImage: NetworkImage(
+                'https://images.unsplash.com/photo-1602043410209-d57816124451?q=80&w=1332&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+              ),
+            ),
+          ),
+          PopupMenuButton<String>(
+            icon: const Icon(Icons.more_vert, color: Colors.white),
+            onSelected: (value) async {
+              switch (value) {
+                case 'about':
+                  Navigator.pushNamed(context, Routes.aboutF1); // open About F1
+                  break;
+              }
+            },
+            itemBuilder: (context) => const [
+              PopupMenuItem(
+                value: 'about',
+                child: ListTile(
+                  leading: Icon(Icons.info_outline),
+                  title: Text('About F1'),
+                ),
+              ),
+            ],
+          ),
+
         ],
       ),
       backgroundColor: darkBg,
@@ -95,7 +125,7 @@ class Profile extends StatelessWidget {
                                       const CircleAvatar(
                                         radius: 50,
                                         backgroundImage: NetworkImage(
-                                          "https://placehold.co/600x400/000000/FFFFFF/png",
+                                          "https://images.unsplash.com/photo-1602043410209-d57816124451?q=80&w=1332&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
                                         ),
                                       ),
                                       Positioned(
@@ -210,7 +240,7 @@ class Profile extends StatelessWidget {
               const CircleAvatar(
                 radius: 50,
                 backgroundImage: NetworkImage(
-                  "https://placehold.co/600x400/000000/FFFFFF/png",
+                  "https://images.unsplash.com/photo-1602043410209-d57816124451?q=80&w=1332&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
                 ),
               ),
               const SizedBox(height: 20),
@@ -246,14 +276,17 @@ class Profile extends StatelessWidget {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(
-                                'Favorite Teams',
-                                style: TextStyle(
-                                  fontSize: 18,
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
+                          Row(children: [    Text(
+                            'Favorite Teams',
+                            style: TextStyle(
+                              fontSize: 18,
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          SizedBox(width: 5,),
+                          Icon(Icons.favorite,color: f1Red,)
+                          ],),
                               SizedBox(height: 10),
                               // Display the list of favorite teams
                               Column(
